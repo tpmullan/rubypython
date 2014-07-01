@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ffi>, ["~> 1.0.7"])
+      s.add_runtime_dependency(%q<ffi>, [">= 1.9.3"])
       s.add_runtime_dependency(%q<blankslate>, [">= 2.1.2.3"])
       s.add_development_dependency(%q<rubyforge>, [">= 2.0.4"])
       s.add_development_dependency(%q<rdoc>, ["~> 4.0"])
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<tilt>, ["~> 1.0"])
       s.add_development_dependency(%q<hoe>, ["~> 3.8"])
     else
-      s.add_dependency(%q<ffi>, ["~> 1.0.7"])
+      s.add_dependency(%q<ffi>, [">= 1.9.3"])
       s.add_dependency(%q<blankslate>, [">= 2.1.2.3"])
       s.add_dependency(%q<rubyforge>, [">= 2.0.4"])
       s.add_dependency(%q<rdoc>, ["~> 4.0"])
@@ -53,7 +53,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<hoe>, ["~> 3.8"])
     end
   else
-    s.add_dependency(%q<ffi>, ["~> 1.0.7"])
+    s.add_dependency(%q<ffi>, [">= 1.9.3"])
     s.add_dependency(%q<blankslate>, [">= 2.1.2.3"])
     s.add_dependency(%q<rubyforge>, [">= 2.0.4"])
     s.add_dependency(%q<rdoc>, ["~> 4.0"])
