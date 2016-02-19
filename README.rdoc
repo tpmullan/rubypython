@@ -58,12 +58,16 @@ start before running the code provided in the block and stop it afterwards.
 
   require "rubypython"
 
-  RubyPython.start(:python_exe => "python2.7") # Can also be a full path
+  RubyPython.start(python_exe: "python2.7") # Can also be a full path
 
   cPickle = RubyPython.import("cPickle")
   p cPickle.dumps("Testing RubyPython.").rubify
 
   RubyPython.stop # stop the Python interpreter
+
+=== Override libpython path if autodetect fails
+
+  RubyPython.start(python_lib: "/usr/lib/libpython2.7.so")
 
 === VirtualEnv
 
