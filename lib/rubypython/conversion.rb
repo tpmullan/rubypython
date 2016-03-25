@@ -288,8 +288,8 @@ module RubyPython::Conversion
       pVal = val.read_pointer
       rKey = ptorObject(pKey)
       rVal = ptorObject(pVal)
-      RubyPython.Py_IncRef pKey if rKey.kind_of? ::FFI::Pointer
-      RubyPython.Py_IncRef pVal if rVal.kind_of? ::FFI::Pointer
+      RubyPython::Python.Py_IncRef pKey if rKey.kind_of? ::FFI::Pointer
+      RubyPython::Python.Py_IncRef pVal if rVal.kind_of? ::FFI::Pointer
       rb_hash[rKey] = rVal
     end
 
@@ -303,6 +303,8 @@ module RubyPython::Conversion
   # [pObj]  An FFI::Pointer to a \Python object.
   def self.ptorObject(pObj)
     if RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyString_Type.to_ptr) != 0
+      ptorString pObj
+    elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyUnicode_Type.to_ptr) != 0
       ptorString pObj
     elsif RubyPython::Macros.PyObject_TypeCheck(pObj, RubyPython::Python.PyList_Type.to_ptr) != 0
       ptorList pObj
