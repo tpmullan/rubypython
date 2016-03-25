@@ -75,10 +75,10 @@ class RubyPython::Interpreter
       end
     end
 
-    @library = find_python_lib
+    @library = find_python_lib(options[:python_lib])
   end
 
-  def find_python_lib
+  def find_python_lib(user_specified_lib)
     # By default, the library name will be something like
     # libpython2.6.so, but that won't always work.
     @libbase = "#{::FFI::Platform::LIBPREFIX}#{@version_name}"
@@ -87,7 +87,8 @@ class RubyPython::Interpreter
 
     # We may need to look in multiple locations for Python, so let's
     # build this as an array.
-    @locations = [ File.join(@sys_prefix, "lib", @libname) ]
+    @locations = user_specified_lib.nil? ? [] : [ user_specified_lib ]
+    @locations << File.join(@sys_prefix, "lib", @libname)
 
     if ::FFI::Platform.mac?
       # On the Mac, let's add a special case that has even a different
@@ -111,6 +112,8 @@ class RubyPython::Interpreter
           @locations << File.join("/opt/lib64", name)
           @locations << File.join("/usr/local/lib64", name)
           @locations << File.join("/usr/lib64", name)
+          @locations << File.join(@sys_prefix, "lib", "x86_64-linux-gnu", name)
+          @locations << File.join(@sys_prefix, "lib", @version_name, "config-x86_64-linux-gnu", name)
         end
         @locations << File.join("/opt/local/lib", name)
         @locations << File.join("/opt/lib", name)
